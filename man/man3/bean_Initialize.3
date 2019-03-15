@@ -1,0 +1,38 @@
+.TH "bean.Initialize" 3 "Fri Mar 15 2019" "Version 1" "Rural_House" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+bean.Initialize
+.SH SYNOPSIS
+.br
+.PP
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBmain\fP (String[] args)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 9 of file Initialize\&.java\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "static void bean\&.Initialize\&.main (String [] args)\fC [static]\fP"
+
+.PP
+Definition at line 11 of file Initialize\&.java\&.
+.PP
+.nf
+11                                            {
+12         ApplicationFacadeInterfaceWS facadeBl = new FacadeImplementationWS();
+13         facadeBl\&.initializeBD();
+14         Vector<RuralHouse> houses = facadeBl\&.getAllRuralHouses();
+15     }
+.fi
+.PP
+References businessLogic\&.ApplicationFacadeInterfaceWS\&.getAllRuralHouses(), and businessLogic\&.ApplicationFacadeInterfaceWS\&.initializeBD()\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Rural_House from the source code\&.

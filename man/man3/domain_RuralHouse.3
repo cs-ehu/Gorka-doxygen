@@ -1,0 +1,408 @@
+.TH "domain.RuralHouse" 3 "Fri Mar 15 2019" "Version 1" "Rural_House" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+domain.RuralHouse
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "Set< \fBOffer\fP > \fBgetOffers\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetOffers\fP (Set< \fBOffer\fP > \fBoffers\fP)"
+.br
+.ti -1c
+.RI "\fBRuralHouse\fP ()"
+.br
+.ti -1c
+.RI "\fBRuralHouse\fP (String \fBdescription\fP, String \fBcity\fP)"
+.br
+.ti -1c
+.RI "Integer \fBgetHouseNumber\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetHouseNumber\fP (Integer \fBhouseNumber\fP)"
+.br
+.ti -1c
+.RI "String \fBgetDescription\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetDescription\fP (String \fBdescription\fP)"
+.br
+.ti -1c
+.RI "String \fBgetCity\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetCity\fP (String \fBcity\fP)"
+.br
+.ti -1c
+.RI "\fBOffer\fP \fBcreateOffer\fP (Date firstDay, Date lastDay, float price)"
+.br
+.RI "This method creates an offer with a house number, first day, last day and price\&. "
+.ti -1c
+.RI "int \fBhashCode\fP ()"
+.br
+.ti -1c
+.RI "String \fBtoString\fP ()"
+.br
+.ti -1c
+.RI "boolean \fBequals\fP (Object obj)"
+.br
+.ti -1c
+.RI "Vector< \fBOffer\fP > \fBgetOffers\fP (Date firstDay, Date lastDay)"
+.br
+.RI "This method obtains available offers for a concrete house in a certain period\&. "
+.ti -1c
+.RI "\fBOffer\fP \fBoverlapsWith\fP (Date firstDay, Date lastDay)"
+.br
+.RI "This method obtains the first offer that overlaps with the provided dates\&. "
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "Set< \fBOffer\fP > \fBoffers\fP"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "Integer \fBhouseNumber\fP"
+.br
+.ti -1c
+.RI "String \fBdescription\fP"
+.br
+.ti -1c
+.RI "String \fBcity\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 10 of file RuralHouse\&.java\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "domain\&.RuralHouse\&.RuralHouse ()"
+
+.PP
+Definition at line 27 of file RuralHouse\&.java\&.
+.PP
+.nf
+27                         {
+28 
+29     }
+.fi
+.PP
+Referenced by domain\&.RuralHouse\&.equals()\&.
+.SS "domain\&.RuralHouse\&.RuralHouse (String description, String city)"
+
+.PP
+Definition at line 31 of file RuralHouse\&.java\&.
+.PP
+.nf
+31                                                        {
+32         this\&.description = description;
+33         this\&.city = city;
+34         offers=new HashSet<Offer>();
+35     }
+.fi
+.PP
+References domain\&.RuralHouse\&.city, domain\&.RuralHouse\&.description, and domain\&.RuralHouse\&.offers\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBOffer\fP domain\&.RuralHouse\&.createOffer (Date firstDay, Date lastDay, float price)"
+
+.PP
+This method creates an offer with a house number, first day, last day and price\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIHouse\fP number, start day, last day and price 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+None 
+.RE
+.PP
+
+.PP
+Definition at line 71 of file RuralHouse\&.java\&.
+.PP
+.nf
+71                                                                         {
+72         //System\&.out\&.println("LLAMADA RuralHouse createOffer, offerNumber="+" firstDay="+firstDay+" lastDay="+lastDay+" price="+price);
+73         Offer off=new Offer(firstDay,lastDay,price,this);
+74         offers\&.add(off);
+75         return off;
+76     }
+.fi
+.PP
+References domain\&.RuralHouse\&.offers\&.
+.PP
+Referenced by dataAccess\&.HibernateDataAccess\&.createOffer()\&.
+.SS "boolean domain\&.RuralHouse\&.equals (Object obj)"
+
+.PP
+Definition at line 94 of file RuralHouse\&.java\&.
+.PP
+.nf
+94                                       {
+95         RuralHouse other = (RuralHouse) obj;
+96         if (this == obj)
+97           return true;
+98         if (obj == null)
+99           return false;
+100         if (getClass() != obj\&.getClass())
+101           return false;
+102 //      if (houseNumber != other\&.houseNumber) // NO COMPARAR ASÍ ya que houseNumber NO ES "int" sino objeto de "java\&.lang\&.Integer"
+103         if (!houseNumber\&.equals(other\&.houseNumber))
+104           return false;
+105         return true;
+106     }
+.fi
+.PP
+References domain\&.RuralHouse\&.houseNumber, and domain\&.RuralHouse\&.RuralHouse()\&.
+.SS "String domain\&.RuralHouse\&.getCity ()"
+
+.PP
+Definition at line 54 of file RuralHouse\&.java\&.
+.PP
+.nf
+54                             {
+55         return city;
+56     }
+.fi
+.PP
+References domain\&.RuralHouse\&.city\&.
+.SS "String domain\&.RuralHouse\&.getDescription ()"
+
+.PP
+Definition at line 45 of file RuralHouse\&.java\&.
+.PP
+.nf
+45                                    {
+46         return description;
+47     }
+.fi
+.PP
+References domain\&.RuralHouse\&.description\&.
+.SS "Integer domain\&.RuralHouse\&.getHouseNumber ()"
+
+.PP
+Definition at line 37 of file RuralHouse\&.java\&.
+.PP
+.nf
+37                                     {
+38         return houseNumber;
+39     }
+.fi
+.PP
+References domain\&.RuralHouse\&.houseNumber\&.
+.PP
+Referenced by dataAccess\&.HibernateDataAccess\&.createOffer(), and dataAccess\&.HibernateDataAccess\&.getOffers()\&.
+.SS "Set<\fBOffer\fP> domain\&.RuralHouse\&.getOffers ()"
+
+.PP
+Definition at line 19 of file RuralHouse\&.java\&.
+.PP
+.nf
+19                                   {
+20         return offers;
+21     }
+.fi
+.PP
+References domain\&.RuralHouse\&.offers\&.
+.PP
+Referenced by dataAccess\&.HibernateDataAccess\&.getOffers()\&.
+.SS "Vector<\fBOffer\fP> domain\&.RuralHouse\&.getOffers (Date firstDay, Date lastDay)"
+
+.PP
+This method obtains available offers for a concrete house in a certain period\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIhouseNumber,the\fP house number where the offers must be obtained 
+.br
+\fIfirstDay,first\fP day in a period range 
+.br
+\fIlastDay,last\fP day in a period range 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+a HashSet of offers(Offer class) available in this period 
+.RE
+.PP
+
+.PP
+Definition at line 116 of file RuralHouse\&.java\&.
+.PP
+.nf
+116                                                                   {
+117         
+118         Vector<Offer> availableOffers=new Vector<Offer>();
+119         Iterator<Offer> e=offers\&.iterator();
+120         Offer offer;
+121         while (e\&.hasNext()){
+122             offer=e\&.next();
+123             if ( ((offer\&.getFirstDay()\&.compareTo(firstDay) >= 0) && (offer\&.getLastDay()\&.compareTo(lastDay) <= 0)) && (offer\&.getBook()\&.equals("NO"))) {
+124                     availableOffers\&.add(offer);
+125 
+126             }
+127         }
+128         return availableOffers;
+129         
+130     }
+.fi
+.PP
+References domain\&.Offer\&.getBook(), domain\&.Offer\&.getFirstDay(), domain\&.Offer\&.getLastDay(), and domain\&.RuralHouse\&.offers\&.
+.SS "int domain\&.RuralHouse\&.hashCode ()"
+
+.PP
+Definition at line 80 of file RuralHouse\&.java\&.
+.PP
+.nf
+80                           {
+81 
+82         final int prime = 31;
+83         int result = 1;
+84         result = prime * result + houseNumber\&.hashCode();
+85         return result;
+86     }
+.fi
+.PP
+References domain\&.RuralHouse\&.houseNumber\&.
+.SS "\fBOffer\fP domain\&.RuralHouse\&.overlapsWith (Date firstDay, Date lastDay)"
+
+.PP
+This method obtains the first offer that overlaps with the provided dates\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfirstDay,first\fP day in a period range 
+.br
+\fIlastDay,last\fP day in a period range 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first offer that overlaps with those dates, or null if there is no overlapping offer 
+.RE
+.PP
+
+.PP
+Definition at line 141 of file RuralHouse\&.java\&.
+.PP
+.nf
+141                                                              {
+142         
+143         Iterator<Offer> e=offers\&.iterator();
+144         Offer offer=null;
+145         while (e\&.hasNext()){
+146             offer=e\&.next();
+147             if ( (offer\&.getFirstDay()\&.compareTo(lastDay)<0) && (offer\&.getLastDay()\&.compareTo(firstDay)>0))
+148                 return offer;
+149         }
+150         return null;
+151         
+152     }
+.fi
+.PP
+References domain\&.Offer\&.getFirstDay(), domain\&.Offer\&.getLastDay(), and domain\&.RuralHouse\&.offers\&.
+.PP
+Referenced by dataAccess\&.HibernateDataAccess\&.existsOverlappingOffer()\&.
+.SS "void domain\&.RuralHouse\&.setCity (String city)"
+
+.PP
+Definition at line 58 of file RuralHouse\&.java\&.
+.PP
+.nf
+58                                      {
+59         this\&.city=city;
+60     }
+.fi
+.PP
+References domain\&.RuralHouse\&.city\&.
+.SS "void domain\&.RuralHouse\&.setDescription (String description)"
+
+.PP
+Definition at line 49 of file RuralHouse\&.java\&.
+.PP
+.nf
+49                                                    {
+50         this\&.description=description;
+51     }
+.fi
+.PP
+References domain\&.RuralHouse\&.description\&.
+.SS "void domain\&.RuralHouse\&.setHouseNumber (Integer houseNumber)"
+
+.PP
+Definition at line 41 of file RuralHouse\&.java\&.
+.PP
+.nf
+41                                                     {
+42         this\&.houseNumber = houseNumber;
+43     }
+.fi
+.PP
+References domain\&.RuralHouse\&.houseNumber\&.
+.SS "void domain\&.RuralHouse\&.setOffers (Set< \fBOffer\fP > offers)"
+
+.PP
+Definition at line 23 of file RuralHouse\&.java\&.
+.PP
+.nf
+23                                              {
+24         this\&.offers = offers;
+25     }
+.fi
+.PP
+References domain\&.RuralHouse\&.offers\&.
+.SS "String domain\&.RuralHouse\&.toString ()"
+
+.PP
+Definition at line 89 of file RuralHouse\&.java\&.
+.PP
+.nf
+89                              {
+90         return this\&.houseNumber + ": " + this\&.city;
+91     }
+.fi
+.PP
+References domain\&.RuralHouse\&.city\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "String domain\&.RuralHouse\&.city\fC [private]\fP"
+
+.PP
+Definition at line 15 of file RuralHouse\&.java\&.
+.PP
+Referenced by domain\&.RuralHouse\&.getCity(), domain\&.RuralHouse\&.RuralHouse(), domain\&.RuralHouse\&.setCity(), and domain\&.RuralHouse\&.toString()\&.
+.SS "String domain\&.RuralHouse\&.description\fC [private]\fP"
+
+.PP
+Definition at line 14 of file RuralHouse\&.java\&.
+.PP
+Referenced by domain\&.RuralHouse\&.getDescription(), domain\&.RuralHouse\&.RuralHouse(), and domain\&.RuralHouse\&.setDescription()\&.
+.SS "Integer domain\&.RuralHouse\&.houseNumber\fC [private]\fP"
+
+.PP
+Definition at line 13 of file RuralHouse\&.java\&.
+.PP
+Referenced by domain\&.RuralHouse\&.equals(), domain\&.RuralHouse\&.getHouseNumber(), domain\&.RuralHouse\&.hashCode(), and domain\&.RuralHouse\&.setHouseNumber()\&.
+.SS "Set<\fBOffer\fP> domain\&.RuralHouse\&.offers"
+
+.PP
+Definition at line 16 of file RuralHouse\&.java\&.
+.PP
+Referenced by domain\&.RuralHouse\&.createOffer(), domain\&.RuralHouse\&.getOffers(), domain\&.RuralHouse\&.overlapsWith(), domain\&.RuralHouse\&.RuralHouse(), and domain\&.RuralHouse\&.setOffers()\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Rural_House from the source code\&.

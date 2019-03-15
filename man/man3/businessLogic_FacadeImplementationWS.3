@@ -1,0 +1,234 @@
+.TH "businessLogic.FacadeImplementationWS" 3 "Fri Mar 15 2019" "Version 1" "Rural_House" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+businessLogic.FacadeImplementationWS
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBbusinessLogic\&.ApplicationFacadeInterfaceWS\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBFacadeImplementationWS\fP ()"
+.br
+.ti -1c
+.RI "\fBOffer\fP \fBcreateOffer\fP (\fBRuralHouse\fP ruralHouse, Date firstDay, Date lastDay, float price)  throws OverlappingOfferExists, BadDates "
+.br
+.RI "This method creates an offer with a house number, first day, last day and price\&. "
+.ti -1c
+.RI "Vector< \fBRuralHouse\fP > \fBgetAllRuralHouses\fP ()"
+.br
+.RI "This method creates a book with a corresponding parameters\&. "
+.ti -1c
+.RI "Vector< \fBOffer\fP > \fBgetOffers\fP (\fBRuralHouse\fP rh, Date firstDay, Date lastDay)"
+.br
+.RI "This method obtains the offers of a ruralHouse in the provided dates\&. "
+.ti -1c
+.RI "void \fBinitializeBD\fP ()"
+.br
+.ti -1c
+.RI "void \fBbookOffer\fP (\fBOffer\fP bookOffer)"
+.br
+.ti -1c
+.RI "boolean \fBcoincide\fP (\fBRuralHouse\fP houseCode, Date firstDay, Date lastDay)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 22 of file FacadeImplementationWS\&.java\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "businessLogic\&.FacadeImplementationWS\&.FacadeImplementationWS ()"
+
+.PP
+Definition at line 28 of file FacadeImplementationWS\&.java\&.
+.PP
+.nf
+28                                     {
+29 
+30     }
+.fi
+.SH "Member Function Documentation"
+.PP 
+.SS "void businessLogic\&.FacadeImplementationWS\&.bookOffer (\fBOffer\fP bookOffer)"
+
+.PP
+Implements \fBbusinessLogic\&.ApplicationFacadeInterfaceWS\fP\&.
+.PP
+Definition at line 111 of file FacadeImplementationWS\&.java\&.
+.PP
+.nf
+111                                            {
+112         HibernateDataAccess HDA = new HibernateDataAccess();
+113         HDA\&.bookOffer(bookOffer);
+114     }
+.fi
+.PP
+References dataAccess\&.HibernateDataAccess\&.bookOffer()\&.
+.SS "boolean businessLogic\&.FacadeImplementationWS\&.coincide (\fBRuralHouse\fP houseCode, Date firstDay, Date lastDay)"
+
+.PP
+Implements \fBbusinessLogic\&.ApplicationFacadeInterfaceWS\fP\&.
+.PP
+Definition at line 117 of file FacadeImplementationWS\&.java\&.
+.PP
+.nf
+117                                                                                {
+118         HibernateDataAccess HDA = new HibernateDataAccess();
+119         boolean a = HDA\&.coincide(houseCode, firstDay, lastDay);
+120         return a;
+121     }
+.fi
+.PP
+References dataAccess\&.HibernateDataAccess\&.coincide()\&.
+.SS "\fBOffer\fP businessLogic\&.FacadeImplementationWS\&.createOffer (\fBRuralHouse\fP ruralHouse, Date firstDay, Date lastDay, float price) throws \fBOverlappingOfferExists\fP, \fBBadDates\fP"
+
+.PP
+This method creates an offer with a house number, first day, last day and price\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIHouse\fP number, start day, last day and price 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the created offer, or null, or an exception 
+.RE
+.PP
+
+.PP
+Implements \fBbusinessLogic\&.ApplicationFacadeInterfaceWS\fP\&.
+.PP
+Definition at line 40 of file FacadeImplementationWS\&.java\&.
+.PP
+.nf
+41                                                     {
+42         HibernateDataAccess dbManager = new HibernateDataAccess();
+43         Offer o = null;
+44 
+45         if (firstDay\&.compareTo(lastDay) >= 0) {
+46             throw new BadDates();
+47         }
+48 
+49         boolean b = dbManager\&.existsOverlappingOffer(ruralHouse, firstDay, lastDay);
+50         if (!b)
+51             o = dbManager\&.createOffer(ruralHouse, firstDay, lastDay, price);
+52         return o;
+53 
+54     }
+.fi
+.PP
+References dataAccess\&.HibernateDataAccess\&.createOffer(), and dataAccess\&.HibernateDataAccess\&.existsOverlappingOffer()\&.
+.SS "Vector<\fBRuralHouse\fP> businessLogic\&.FacadeImplementationWS\&.getAllRuralHouses ()"
+
+.PP
+This method creates a book with a corresponding parameters\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIFirst\fP day, last day, house number and telephone 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+a bookThis method retrieves the existing rural houses
+.PP
+a Set of rural houses 
+.RE
+.PP
+
+.PP
+Implements \fBbusinessLogic\&.ApplicationFacadeInterfaceWS\fP\&.
+.PP
+Definition at line 56 of file FacadeImplementationWS\&.java\&.
+.PP
+.nf
+56                                                   {
+57         HibernateDataAccess dbManager = new HibernateDataAccess();
+58         Vector<RuralHouse> ruralHouses = dbManager\&.getAllRuralHouses();
+59         return ruralHouses;
+60     }
+.fi
+.PP
+References dataAccess\&.HibernateDataAccess\&.getAllRuralHouses()\&.
+.SS "Vector<\fBOffer\fP> businessLogic\&.FacadeImplementationWS\&.getOffers (\fBRuralHouse\fP rh, Date firstDay, Date lastDay)"
+
+.PP
+This method obtains the offers of a ruralHouse in the provided dates\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIruralHouse,the\fP ruralHouse to inspect 
+.br
+\fIfirstDay,first\fP day in a period range 
+.br
+\fIlastDay,last\fP day in a period range 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first offer that overlaps with those dates, or null if there is no overlapping offer 
+.RE
+.PP
+
+.PP
+Implements \fBbusinessLogic\&.ApplicationFacadeInterfaceWS\fP\&.
+.PP
+Definition at line 76 of file FacadeImplementationWS\&.java\&.
+.PP
+.nf
+76                                                                                {
+77         HibernateDataAccess dbManager = new HibernateDataAccess();
+78         Vector<Offer> offers = new Vector<Offer>();
+79         offers = dbManager\&.getOffers(rh, firstDay, lastDay);
+80         return offers;
+81     }
+.fi
+.PP
+References dataAccess\&.HibernateDataAccess\&.getOffers()\&.
+.SS "void businessLogic\&.FacadeImplementationWS\&.initializeBD ()"
+
+.PP
+Implements \fBbusinessLogic\&.ApplicationFacadeInterfaceWS\fP\&.
+.PP
+Definition at line 83 of file FacadeImplementationWS\&.java\&.
+.PP
+.nf
+83                                {
+84 
+85         Session session = HibernateUtil\&.getSessionFactory()\&.getCurrentSession();
+86         session\&.beginTransaction();
+87         try {
+88             @SuppressWarnings("unchecked")
+89             List<RuralHouse> query = session\&.createQuery("FROM RuralHouse")\&.list();
+90             Iterator<RuralHouse> i = query\&.iterator();
+91             while (i\&.hasNext()) {
+92                 RuralHouse rh = i\&.next();
+93                 session\&.delete(rh);
+94             }
+95             RuralHouse rh1 = new RuralHouse("Ezkioko etxea", "Ezkio");
+96             RuralHouse rh2 = new RuralHouse("Etxetxikia", "Iruna");
+97             RuralHouse rh3 = new RuralHouse("Udaletxea", "Bilbo");
+98             RuralHouse rh4 = new RuralHouse("Gaztetxea", "Renteria");
+99             session\&.save(rh1);
+100             session\&.save(rh2);
+101             session\&.save(rh3);
+102             session\&.save(rh4);
+103             session\&.getTransaction()\&.commit();
+104             System\&.out\&.println("Db initialized");
+105         } catch (Exception e) {
+106             e\&.printStackTrace();
+107         }
+108 
+109     }
+.fi
+.PP
+References modelo\&.dominio\&.HibernateUtil\&.getSessionFactory()\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Rural_House from the source code\&.

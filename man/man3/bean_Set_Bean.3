@@ -1,0 +1,427 @@
+.TH "bean.Set_Bean" 3 "Fri Mar 15 2019" "Version 1" "Rural_House" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+bean.Set_Bean
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSet_Bean\fP ()"
+.br
+.ti -1c
+.RI "\fBRuralHouse\fP \fBgetHouseCode\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetHouseCode\fP (\fBRuralHouse\fP \fBhouseCode\fP)"
+.br
+.ti -1c
+.RI "int \fBgetPrice\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetPrice\fP (int \fBprice\fP)"
+.br
+.ti -1c
+.RI "Date \fBgetFirstDay\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetFirstDay\fP (Date \fBfirstDay\fP)"
+.br
+.ti -1c
+.RI "Date \fBgetLastDay\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetLastDay\fP (Date \fBlastDay\fP)"
+.br
+.ti -1c
+.RI "List< \fBRuralHouse\fP > \fBgetHouses\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetHouses\fP (List< \fBRuralHouse\fP > \fBhouses\fP)"
+.br
+.ti -1c
+.RI "void \fBonDateSelect\fP (SelectEvent event)"
+.br
+.ti -1c
+.RI "String \fBcreateOffer\fP ()"
+.br
+.ti -1c
+.RI "String \fBgetError\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetError\fP (String \fBerror\fP)"
+.br
+.ti -1c
+.RI "boolean \fBisShowError\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetShowError\fP (boolean \fBshowError\fP)"
+.br
+.ti -1c
+.RI "void \fBerrorFalse\fP ()"
+.br
+.ti -1c
+.RI "void \fBborrar\fP ()"
+.br
+.in -1c
+.SS "Package Attributes"
+
+.in +1c
+.ti -1c
+.RI "String \fBerror\fP"
+.br
+.ti -1c
+.RI "boolean \fBshowError\fP"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBRuralHouse\fP \fBhouseCode\fP"
+.br
+.ti -1c
+.RI "int \fBprice\fP"
+.br
+.ti -1c
+.RI "Date \fBfirstDay\fP"
+.br
+.ti -1c
+.RI "Date \fBlastDay\fP"
+.br
+.ti -1c
+.RI "List< \fBRuralHouse\fP > \fBhouses\fP"
+.br
+.ti -1c
+.RI "\fBApplicationFacadeInterfaceWS\fP \fBfacadeBL\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 18 of file Set_Bean\&.java\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "bean\&.Set_Bean\&.Set_Bean ()"
+
+.PP
+Definition at line 30 of file Set_Bean\&.java\&.
+.PP
+.nf
+30                       {
+31         facadeBL = Facade_Bean\&.getBusinessLogic();
+32         houses = facadeBL\&.getAllRuralHouses();
+33     }
+.fi
+.PP
+References bean\&.Set_Bean\&.facadeBL, businessLogic\&.ApplicationFacadeInterfaceWS\&.getAllRuralHouses(), bean\&.Facade_Bean\&.getBusinessLogic(), and bean\&.Set_Bean\&.houses\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "void bean\&.Set_Bean\&.borrar ()"
+
+.PP
+Definition at line 137 of file Set_Bean\&.java\&.
+.PP
+.nf
+137                          {
+138         price = 0;
+139         firstDay = null;
+140         lastDay = null;
+141     }
+.fi
+.PP
+References bean\&.Set_Bean\&.firstDay, bean\&.Set_Bean\&.lastDay, and bean\&.Set_Bean\&.price\&.
+.PP
+Referenced by bean\&.Set_Bean\&.createOffer()\&.
+.SS "String bean\&.Set_Bean\&.createOffer ()"
+
+.PP
+Definition at line 82 of file Set_Bean\&.java\&.
+.PP
+.nf
+82                                 {
+83         if ((firstDay != null) || (lastDay != null) && (firstDay\&.compareTo(lastDay) < 0) && (price > 0)) {
+84             try {
+85                 if (facadeBL\&.coincide(houseCode, firstDay, lastDay) == false) {
+86                     facadeBL\&.createOffer(houseCode, firstDay, lastDay, price);
+87                     error = "Offer create";
+88                     showError = true;
+89                     borrar();
+90                 } else {
+91                     error = "Overlapping Offer";
+92                     showError = true;
+93                 }
+94             } catch (OverlappingOfferExists e) {
+95                 error = "Overlapping Offer";
+96                 showError = true;
+97             } catch (BadDates e) {
+98                 error = "Bad Dates: firstDay < lastDay";
+99                 showError = true;
+100             } catch (Exception e) {
+101                 error = "Error";
+102                 showError = true;
+103             }
+104             return null;
+105         } else if (price <= 0) {
+106             error = "Price > 0";
+107             showError = true;
+108             return null;
+109         } else {
+110             error = "Dates!=null";
+111             showError = true;
+112             return null;
+113         }
+114 
+115     }
+.fi
+.PP
+References bean\&.Set_Bean\&.borrar(), businessLogic\&.ApplicationFacadeInterfaceWS\&.coincide(), businessLogic\&.ApplicationFacadeInterfaceWS\&.createOffer(), bean\&.Set_Bean\&.error, bean\&.Set_Bean\&.facadeBL, bean\&.Set_Bean\&.firstDay, bean\&.Set_Bean\&.houseCode, bean\&.Set_Bean\&.lastDay, bean\&.Set_Bean\&.price, and bean\&.Set_Bean\&.showError\&.
+.SS "void bean\&.Set_Bean\&.errorFalse ()"
+
+.PP
+Definition at line 133 of file Set_Bean\&.java\&.
+.PP
+.nf
+133                              {
+134         showError = false;
+135     }
+.fi
+.PP
+References bean\&.Set_Bean\&.showError\&.
+.SS "String bean\&.Set_Bean\&.getError ()"
+
+.PP
+Definition at line 117 of file Set_Bean\&.java\&.
+.PP
+.nf
+117                              {
+118         return error;
+119     }
+.fi
+.PP
+References bean\&.Set_Bean\&.error\&.
+.SS "Date bean\&.Set_Bean\&.getFirstDay ()"
+
+.PP
+Definition at line 51 of file Set_Bean\&.java\&.
+.PP
+.nf
+51                               {
+52         return firstDay;
+53     }
+.fi
+.PP
+References bean\&.Set_Bean\&.firstDay\&.
+.SS "\fBRuralHouse\fP bean\&.Set_Bean\&.getHouseCode ()"
+
+.PP
+Definition at line 35 of file Set_Bean\&.java\&.
+.PP
+.nf
+35                                      {
+36         return houseCode;
+37     }
+.fi
+.PP
+References bean\&.Set_Bean\&.houseCode\&.
+.SS "List<\fBRuralHouse\fP> bean\&.Set_Bean\&.getHouses ()"
+
+.PP
+Definition at line 67 of file Set_Bean\&.java\&.
+.PP
+.nf
+67                                         {
+68         return houses;
+69     }
+.fi
+.PP
+References bean\&.Set_Bean\&.houses\&.
+.SS "Date bean\&.Set_Bean\&.getLastDay ()"
+
+.PP
+Definition at line 59 of file Set_Bean\&.java\&.
+.PP
+.nf
+59                              {
+60         return lastDay;
+61     }
+.fi
+.PP
+References bean\&.Set_Bean\&.lastDay\&.
+.SS "int bean\&.Set_Bean\&.getPrice ()"
+
+.PP
+Definition at line 43 of file Set_Bean\&.java\&.
+.PP
+.nf
+43                           {
+44         return price;
+45     }
+.fi
+.PP
+References bean\&.Set_Bean\&.price\&.
+.SS "boolean bean\&.Set_Bean\&.isShowError ()"
+
+.PP
+Definition at line 125 of file Set_Bean\&.java\&.
+.PP
+.nf
+125                                  {
+126         return showError;
+127     }
+.fi
+.PP
+References bean\&.Set_Bean\&.showError\&.
+.SS "void bean\&.Set_Bean\&.onDateSelect (SelectEvent event)"
+
+.PP
+Definition at line 75 of file Set_Bean\&.java\&.
+.PP
+.nf
+75                                                 {
+76         FacesContext facesContext = FacesContext\&.getCurrentInstance();
+77         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+78         facesContext\&.addMessage(null,
+79                 new FacesMessage(FacesMessage\&.SEVERITY_INFO, "Date Selected", format\&.format(event\&.getObject())));
+80     }
+.fi
+.SS "void bean\&.Set_Bean\&.setError (String error)"
+
+.PP
+Definition at line 121 of file Set_Bean\&.java\&.
+.PP
+.nf
+121                                        {
+122         this\&.error = error;
+123     }
+.fi
+.PP
+References bean\&.Set_Bean\&.error\&.
+.SS "void bean\&.Set_Bean\&.setFirstDay (Date firstDay)"
+
+.PP
+Definition at line 55 of file Set_Bean\&.java\&.
+.PP
+.nf
+55                                            {
+56         this\&.firstDay = firstDay;
+57     }
+.fi
+.PP
+References bean\&.Set_Bean\&.firstDay\&.
+.SS "void bean\&.Set_Bean\&.setHouseCode (\fBRuralHouse\fP houseCode)"
+
+.PP
+Definition at line 39 of file Set_Bean\&.java\&.
+.PP
+.nf
+39                                                    {
+40         this\&.houseCode = houseCode;
+41     }
+.fi
+.PP
+References bean\&.Set_Bean\&.houseCode\&.
+.SS "void bean\&.Set_Bean\&.setHouses (List< \fBRuralHouse\fP > houses)"
+
+.PP
+Definition at line 71 of file Set_Bean\&.java\&.
+.PP
+.nf
+71                                                    {
+72         this\&.houses = houses;
+73     }
+.fi
+.PP
+References bean\&.Set_Bean\&.houses\&.
+.SS "void bean\&.Set_Bean\&.setLastDay (Date lastDay)"
+
+.PP
+Definition at line 63 of file Set_Bean\&.java\&.
+.PP
+.nf
+63                                          {
+64         this\&.lastDay = lastDay;
+65     }
+.fi
+.PP
+References bean\&.Set_Bean\&.lastDay\&.
+.SS "void bean\&.Set_Bean\&.setPrice (int price)"
+
+.PP
+Definition at line 47 of file Set_Bean\&.java\&.
+.PP
+.nf
+47                                     {
+48         this\&.price = price;
+49     }
+.fi
+.PP
+References bean\&.Set_Bean\&.price\&.
+.SS "void bean\&.Set_Bean\&.setShowError (boolean showError)"
+
+.PP
+Definition at line 129 of file Set_Bean\&.java\&.
+.PP
+.nf
+129                                                 {
+130         this\&.showError = showError;
+131     }
+.fi
+.PP
+References bean\&.Set_Bean\&.showError\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "String bean\&.Set_Bean\&.error\fC [package]\fP"
+
+.PP
+Definition at line 24 of file Set_Bean\&.java\&.
+.PP
+Referenced by bean\&.Set_Bean\&.createOffer(), bean\&.Set_Bean\&.getError(), and bean\&.Set_Bean\&.setError()\&.
+.SS "\fBApplicationFacadeInterfaceWS\fP bean\&.Set_Bean\&.facadeBL\fC [private]\fP"
+
+.PP
+Definition at line 28 of file Set_Bean\&.java\&.
+.PP
+Referenced by bean\&.Set_Bean\&.createOffer(), and bean\&.Set_Bean\&.Set_Bean()\&.
+.SS "Date bean\&.Set_Bean\&.firstDay\fC [private]\fP"
+
+.PP
+Definition at line 22 of file Set_Bean\&.java\&.
+.PP
+Referenced by bean\&.Set_Bean\&.borrar(), bean\&.Set_Bean\&.createOffer(), bean\&.Set_Bean\&.getFirstDay(), and bean\&.Set_Bean\&.setFirstDay()\&.
+.SS "\fBRuralHouse\fP bean\&.Set_Bean\&.houseCode\fC [private]\fP"
+
+.PP
+Definition at line 20 of file Set_Bean\&.java\&.
+.PP
+Referenced by bean\&.Set_Bean\&.createOffer(), bean\&.Set_Bean\&.getHouseCode(), and bean\&.Set_Bean\&.setHouseCode()\&.
+.SS "List<\fBRuralHouse\fP> bean\&.Set_Bean\&.houses\fC [private]\fP"
+
+.PP
+Definition at line 26 of file Set_Bean\&.java\&.
+.PP
+Referenced by bean\&.Set_Bean\&.getHouses(), bean\&.Set_Bean\&.Set_Bean(), and bean\&.Set_Bean\&.setHouses()\&.
+.SS "Date bean\&.Set_Bean\&.lastDay\fC [private]\fP"
+
+.PP
+Definition at line 23 of file Set_Bean\&.java\&.
+.PP
+Referenced by bean\&.Set_Bean\&.borrar(), bean\&.Set_Bean\&.createOffer(), bean\&.Set_Bean\&.getLastDay(), and bean\&.Set_Bean\&.setLastDay()\&.
+.SS "int bean\&.Set_Bean\&.price\fC [private]\fP"
+
+.PP
+Definition at line 21 of file Set_Bean\&.java\&.
+.PP
+Referenced by bean\&.Set_Bean\&.borrar(), bean\&.Set_Bean\&.createOffer(), bean\&.Set_Bean\&.getPrice(), and bean\&.Set_Bean\&.setPrice()\&.
+.SS "boolean bean\&.Set_Bean\&.showError\fC [package]\fP"
+
+.PP
+Definition at line 25 of file Set_Bean\&.java\&.
+.PP
+Referenced by bean\&.Set_Bean\&.createOffer(), bean\&.Set_Bean\&.errorFalse(), bean\&.Set_Bean\&.isShowError(), and bean\&.Set_Bean\&.setShowError()\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Rural_House from the source code\&.

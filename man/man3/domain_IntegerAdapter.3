@@ -1,0 +1,53 @@
+.TH "domain.IntegerAdapter" 3 "Fri Mar 15 2019" "Version 1" "Rural_House" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+domain.IntegerAdapter
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits XmlAdapter< String, Integer >\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "Integer \fBunmarshal\fP (String s)"
+.br
+.ti -1c
+.RI "String \fBmarshal\fP (Integer number)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 5 of file IntegerAdapter\&.java\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "String domain\&.IntegerAdapter\&.marshal (Integer number)"
+
+.PP
+Definition at line 11 of file IntegerAdapter\&.java\&.
+.PP
+.nf
+11                                           {
+12         if (number == null)
+13             return "";
+14 
+15         return number\&.toString();
+16     }
+.fi
+.SS "Integer domain\&.IntegerAdapter\&.unmarshal (String s)"
+
+.PP
+Definition at line 7 of file IntegerAdapter\&.java\&.
+.PP
+.nf
+7                                        {
+8         return Integer\&.parseInt(s);
+9     }
+.fi
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Rural_House from the source code\&.

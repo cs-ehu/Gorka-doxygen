@@ -1,0 +1,394 @@
+.TH "domain.Offer" 3 "Fri Mar 15 2019" "Version 1" "Rural_House" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+domain.Offer
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "String \fBgetBook\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetBook\fP (String \fBbook\fP)"
+.br
+.ti -1c
+.RI "\fBOffer\fP ()"
+.br
+.ti -1c
+.RI "\fBOffer\fP (Date \fBfirstDay\fP, Date \fBlastDay\fP, float \fBprice\fP, \fBRuralHouse\fP \fBruralHouse\fP)"
+.br
+.ti -1c
+.RI "\fBRuralHouse\fP \fBgetRuralHouse\fP ()"
+.br
+.RI "Get the house number of the offer\&. "
+.ti -1c
+.RI "void \fBsetRuralHouse\fP (\fBRuralHouse\fP \fBruralHouse\fP)"
+.br
+.RI "Set the house number to a offer\&. "
+.ti -1c
+.RI "int \fBgetOfferNumber\fP ()"
+.br
+.RI "Get the offer number\&. "
+.ti -1c
+.RI "Date \fBgetFirstDay\fP ()"
+.br
+.RI "Get the first day of the offer\&. "
+.ti -1c
+.RI "void \fBsetFirstDay\fP (Date \fBfirstDay\fP)"
+.br
+.RI "Set the first day of the offer\&. "
+.ti -1c
+.RI "Date \fBgetLastDay\fP ()"
+.br
+.RI "Get the last day of the offer\&. "
+.ti -1c
+.RI "void \fBsetLastDay\fP (Date \fBlastDay\fP)"
+.br
+.RI "Set the last day of the offer\&. "
+.ti -1c
+.RI "float \fBgetPrice\fP ()"
+.br
+.RI "Get the price\&. "
+.ti -1c
+.RI "void \fBsetPrice\fP (float \fBprice\fP)"
+.br
+.RI "Set the price\&. "
+.ti -1c
+.RI "String \fBtoString\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "Integer \fBofferNumber\fP"
+.br
+.ti -1c
+.RI "Date \fBfirstDay\fP"
+.br
+.ti -1c
+.RI "Date \fBlastDay\fP"
+.br
+.ti -1c
+.RI "float \fBprice\fP"
+.br
+.ti -1c
+.RI "String \fBbook\fP"
+.br
+.ti -1c
+.RI "\fBRuralHouse\fP \fBruralHouse\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 5 of file Offer\&.java\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "domain\&.Offer\&.Offer ()"
+
+.PP
+Definition at line 24 of file Offer\&.java\&.
+.PP
+.nf
+24                   {
+25         
+26         
+27     }
+.fi
+.SS "domain\&.Offer\&.Offer (Date firstDay, Date lastDay, float price, \fBRuralHouse\fP ruralHouse)"
+
+.PP
+Definition at line 29 of file Offer\&.java\&.
+.PP
+.nf
+29                                                                                  {
+30           this\&.firstDay = firstDay;
+31           this\&.lastDay = lastDay;
+32           this\&.price = price;
+33           this\&.ruralHouse = ruralHouse;
+34           this\&.book = "NO";
+35     }
+.fi
+.PP
+References domain\&.Offer\&.firstDay, domain\&.Offer\&.lastDay, domain\&.Offer\&.price, and domain\&.Offer\&.ruralHouse\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "String domain\&.Offer\&.getBook ()"
+
+.PP
+Definition at line 14 of file Offer\&.java\&.
+.PP
+.nf
+14                             {
+15         return book;
+16     }
+.fi
+.PP
+References domain\&.Offer\&.book\&.
+.PP
+Referenced by domain\&.RuralHouse\&.getOffers()\&.
+.SS "Date domain\&.Offer\&.getFirstDay ()"
+
+.PP
+Get the first day of the offer\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the first day 
+.RE
+.PP
+
+.PP
+Definition at line 71 of file Offer\&.java\&.
+.PP
+.nf
+71                               {
+72         return this\&.firstDay;
+73     }
+.fi
+.PP
+References domain\&.Offer\&.firstDay\&.
+.PP
+Referenced by domain\&.RuralHouse\&.getOffers(), and domain\&.RuralHouse\&.overlapsWith()\&.
+.SS "Date domain\&.Offer\&.getLastDay ()"
+
+.PP
+Get the last day of the offer\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the last day 
+.RE
+.PP
+
+.PP
+Definition at line 90 of file Offer\&.java\&.
+.PP
+.nf
+90                              {
+91         return this\&.lastDay;
+92     }
+.fi
+.PP
+References domain\&.Offer\&.lastDay\&.
+.PP
+Referenced by domain\&.RuralHouse\&.getOffers(), and domain\&.RuralHouse\&.overlapsWith()\&.
+.SS "int domain\&.Offer\&.getOfferNumber ()"
+
+.PP
+Get the offer number\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+offer number 
+.RE
+.PP
+
+.PP
+Definition at line 60 of file Offer\&.java\&.
+.PP
+.nf
+60                                 {
+61         return this\&.offerNumber;
+62     }
+.fi
+.PP
+References domain\&.Offer\&.offerNumber\&.
+.PP
+Referenced by dataAccess\&.HibernateDataAccess\&.bookOffer()\&.
+.SS "float domain\&.Offer\&.getPrice ()"
+
+.PP
+Get the price\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+price 
+.RE
+.PP
+
+.PP
+Definition at line 109 of file Offer\&.java\&.
+.PP
+.nf
+109                             {
+110         return this\&.price;
+111     }
+.fi
+.PP
+References domain\&.Offer\&.price\&.
+.SS "\fBRuralHouse\fP domain\&.Offer\&.getRuralHouse ()"
+
+.PP
+Get the house number of the offer\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the house number 
+.RE
+.PP
+
+.PP
+Definition at line 41 of file Offer\&.java\&.
+.PP
+.nf
+41                                       {
+42         return this\&.ruralHouse;
+43     }
+.fi
+.PP
+References domain\&.Offer\&.ruralHouse\&.
+.SS "void domain\&.Offer\&.setBook (String book)"
+
+.PP
+Definition at line 18 of file Offer\&.java\&.
+.PP
+.nf
+18                                      {
+19         this\&.book = book;
+20     }
+.fi
+.PP
+References domain\&.Offer\&.book\&.
+.SS "void domain\&.Offer\&.setFirstDay (Date firstDay)"
+
+.PP
+Set the first day of the offer\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfirstDay\fP The first day 
+.RE
+.PP
+
+.PP
+Definition at line 81 of file Offer\&.java\&.
+.PP
+.nf
+81                                            {
+82         this\&.firstDay = firstDay;
+83     }
+.fi
+.PP
+References domain\&.Offer\&.firstDay\&.
+.SS "void domain\&.Offer\&.setLastDay (Date lastDay)"
+
+.PP
+Set the last day of the offer\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlastDay\fP The last day 
+.RE
+.PP
+
+.PP
+Definition at line 100 of file Offer\&.java\&.
+.PP
+.nf
+100                                          {
+101         this\&.lastDay = lastDay;
+102     }
+.fi
+.PP
+References domain\&.Offer\&.lastDay\&.
+.SS "void domain\&.Offer\&.setPrice (float price)"
+
+.PP
+Set the price\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIprice\fP 
+.RE
+.PP
+
+.PP
+Definition at line 118 of file Offer\&.java\&.
+.PP
+.nf
+118                                       {
+119         this\&.price = price;
+120     }
+.fi
+.PP
+References domain\&.Offer\&.price\&.
+.SS "void domain\&.Offer\&.setRuralHouse (\fBRuralHouse\fP ruralHouse)"
+
+.PP
+Set the house number to a offer\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIhouse\fP number 
+.RE
+.PP
+
+.PP
+Definition at line 50 of file Offer\&.java\&.
+.PP
+.nf
+50                                                      {
+51         this\&.ruralHouse = ruralHouse;
+52     }
+.fi
+.PP
+References domain\&.Offer\&.ruralHouse\&.
+.SS "String domain\&.Offer\&.toString ()"
+
+.PP
+Definition at line 122 of file Offer\&.java\&.
+.PP
+.nf
+122                             {
+123         return offerNumber+";"+firstDay\&.toString()+";"+lastDay\&.toString()+";"+price;
+124     }
+.fi
+.PP
+References domain\&.Offer\&.firstDay, domain\&.Offer\&.lastDay, domain\&.Offer\&.offerNumber, and domain\&.Offer\&.price\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "String domain\&.Offer\&.book\fC [private]\fP"
+
+.PP
+Definition at line 11 of file Offer\&.java\&.
+.PP
+Referenced by domain\&.Offer\&.getBook(), and domain\&.Offer\&.setBook()\&.
+.SS "Date domain\&.Offer\&.firstDay\fC [private]\fP"
+
+.PP
+Definition at line 8 of file Offer\&.java\&.
+.PP
+Referenced by domain\&.Offer\&.getFirstDay(), domain\&.Offer\&.Offer(), domain\&.Offer\&.setFirstDay(), and domain\&.Offer\&.toString()\&.
+.SS "Date domain\&.Offer\&.lastDay\fC [private]\fP"
+
+.PP
+Definition at line 9 of file Offer\&.java\&.
+.PP
+Referenced by domain\&.Offer\&.getLastDay(), domain\&.Offer\&.Offer(), domain\&.Offer\&.setLastDay(), and domain\&.Offer\&.toString()\&.
+.SS "Integer domain\&.Offer\&.offerNumber\fC [private]\fP"
+
+.PP
+Definition at line 7 of file Offer\&.java\&.
+.PP
+Referenced by domain\&.Offer\&.getOfferNumber(), and domain\&.Offer\&.toString()\&.
+.SS "float domain\&.Offer\&.price\fC [private]\fP"
+
+.PP
+Definition at line 10 of file Offer\&.java\&.
+.PP
+Referenced by domain\&.Offer\&.getPrice(), domain\&.Offer\&.Offer(), domain\&.Offer\&.setPrice(), and domain\&.Offer\&.toString()\&.
+.SS "\fBRuralHouse\fP domain\&.Offer\&.ruralHouse\fC [private]\fP"
+
+.PP
+Definition at line 22 of file Offer\&.java\&.
+.PP
+Referenced by domain\&.Offer\&.getRuralHouse(), domain\&.Offer\&.Offer(), and domain\&.Offer\&.setRuralHouse()\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Rural_House from the source code\&.
